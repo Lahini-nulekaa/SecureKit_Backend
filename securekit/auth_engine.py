@@ -85,8 +85,13 @@ class AuthEngine:
             
             # Contextual Binding check
             if context:
-                for key in ['ip', 'ua']:
-                    if key in payload and payload[key] != context.get(key):
+                # Check User-Agent (stable across requests in a session)
+                if 'ua' in payload and payload['ua'] != context.get('ua'):
+                    return None
+                
+                # Check IP only if explicitly requested (unstable on Render/Proxies)
+                if os.getenv("STRICT_IP_CHECK", "false").lower() == "true":
+                    if 'ip' in payload and payload['ip'] != context.get('ip'):
                         return None
                         
             return payload
