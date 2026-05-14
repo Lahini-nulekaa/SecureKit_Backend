@@ -121,9 +121,9 @@ async def global_exception_handler(request: Request, exc: Exception):
     log_security_event(f"Unhandled error: {exc}")
     return JSONResponse(status_code=500, content={"detail": str(exc)})
 
-@app.get("/")
-def read_root():
-    log_security_event("Someone accessed the root page.")
+@app.api_route("/", methods=["GET", "HEAD"])
+def read_root(request: Request):
+    log_security_event(f"Someone accessed the root page via {request.method}.")
     return {"message": "SecureKit Healthcare System is Running!"}
 
 @app.get("/login")
