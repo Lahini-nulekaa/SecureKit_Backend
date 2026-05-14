@@ -25,9 +25,16 @@ def create_token(*args, **kwargs):
     return get_framework().auth.issue_token(*args, **kwargs)
 
 def verify_token(*args, **kwargs):
+    import os
+    if os.getenv("BIND_TOKEN_TO_CONTEXT", "true").lower() != "true":
+        return get_framework().auth.validate_token(*args, context=None, **kwargs)
+
     context = {}
-    if 'expected_ip' in kwargs: context['ip'] = kwargs.pop('expected_ip')
-    if 'expected_ua' in kwargs: context['ua'] = kwargs.pop('expected_ua')
+    if 'expected_ip' in kwargs: 
+        context['ip'] = kwargs.pop('expected_ip')
+    if 'expected_ua' in kwargs: 
+        ua = kwargs.pop('expected_ua')
+        context['ua'] = ua[:256] if ua else None
     return get_framework().auth.validate_token(*args, context=context, **kwargs)
 
 def hash_password(password: str):
