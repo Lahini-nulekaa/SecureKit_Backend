@@ -111,11 +111,17 @@ class AuthEngine:
                  raise HTTPException(status_code=401, detail="SecureKit: Missing authentication token")
             
             # Extract context for binding check
+            # Truncate UA to 256 to match the login logic truncation
+            ua = request.headers.get("user-agent")
             context = {
                 "ip": request.client.host if request.client else None,
-                "ua": request.headers.get("user-agent")
+                "ua": ua[:256] if ua else None
             }
             
+            # Allow disabling contextual binding for stability in cloud environments
+            if os.getenv("BIND_TOKEN_TO_CONTEXT", "true").lower() != "true":
+                context = None
+
             payload = self.validate_token(token, context=context)
             if not payload:
                  raise HTTPException(status_code=401, detail="SecureKit: Invalid or expired token")
@@ -141,9 +147,12 @@ def create_token(email: str, expires_in: int = 86400, extra_claims: dict | None 
     return _get_engine().issue_token(email, role, expires_in, extra_claims)
 
 def verify_token(token: str, expected_ip: str | None = None, expected_ua: str | None = None):
+    if os.getenv("BIND_TOKEN_TO_CONTEXT", "true").lower() != "true":
+        return _get_engine().validate_token(token, None)
+        
     context = {}
     if expected_ip: context['ip'] = expected_ip
-    if expected_ua: context['ua'] = expected_ua
+    if expected_ua: context['ua'] = expected_ua[:256]
     return _get_engine().validate_token(token, context)
 
 def hash_password(pw): return AuthEngine.hash_credentials(pw)
