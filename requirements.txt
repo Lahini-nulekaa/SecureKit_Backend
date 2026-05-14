@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+pymongo
+dnspython
+passlib
+python-jose
+email-validator
+cryptography
+pyotp
+qrcode[pil]
+slowapi
+geoip2

@@ -1,0 +1,63 @@
+[
+  {
+    "email": "doc1@example.com",
+    "full_name": "Doc One",
+    "license_id": "LIC1",
+    "role": "doctor",
+    "_id": "49a7deda4cfe4ed38ffc2192cf9c0933"
+  },
+  {
+    "email": "doc2@example.com",
+    "name": "Dr Two",
+    "specialization": "Cardiology",
+    "license_id": "LIC2",
+    "role": "doctor",
+    "_id": "ca01d9cacbab41a2bb0b2a45511b8754"
+  },
+  {
+    "email": "doc2@example.com",
+    "name": "Dr Two",
+    "specialization": "Cardiology",
+    "license_id": "LIC2",
+    "role": "doctor",
+    "_id": "ce995fc5039f433f8729bb2c42098ea0"
+  },
+  {
+    "email": "pending@example.com",
+    "full_name": "Pending Doc",
+    "password": "8b5778ef8fa1c863aaa47f2428a5bdc4:c92c9490e7e7e4df7f05c1280485f35d35b6c910aa481120fd958011472632fb",
+    "license_id": "LICP",
+    "department": "Pediatrics",
+    "role": "doctor",
+    "status": "APPROVED",
+    "created_at": 1768897022.0496602,
+    "_id": "c25f497c051b4310a9c00fa2e2b5ddfd",
+    "reviewed_at": 1768897051.3879516
+  },
+  {
+    "email": "applyonly@example.com",
+    "full_name": "Apply Only",
+    "password": "d6a6cd5539ba405028eb9148c125a9f1:45bf818dc99258028d86d7e59f59dba041a6f6dd98fb22341c689771a2c45edd",
+    "license_id": "LICA",
+    "department": "Dermatology",
+    "role": "doctor",
+    "status": "APPROVED",
+    "created_at": 1768897386.7842858,
+    "_id": "e9f5d19b931a41469d110b394bd21fac",
+    "reviewed_at": 1768897464.9237473,
+    "review_reason": null
+  },
+  {
+    "email": "applyonly@example.com",
+    "full_name": "Apply Only",
+    "password": "9d687bd0b80ae47dba10471d0926df20:f5edf2fe56b71ab4cb30cd51c389e211cc8a3a89216d756a7d60d7a1730a7778",
+    "license_id": "LICA",
+    "department": "Dermatology",
+    "role": "doctor",
+    "status": "APPROVED",
+    "created_at": 1768897529.0051818,
+    "_id": "ddc2af641ce24d0b81d8cd11ed4e7f76",
+    "reviewed_at": 1768897539.3785117,
+    "review_reason": null
+  }
+]
